@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import { addActivity } from '../../store/slices/activitiesSlice';
 import { ActivityType } from '../../types/activity';
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from '../common/Toast';
 
 const ActivityForm: React.FC = () => {
     const dispatch = useDispatch();
+    const { showToast } = useToast();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
@@ -29,6 +31,7 @@ const ActivityForm: React.FC = () => {
             duration: duration ? Number(duration) : undefined,
             completed: false,
         }));
+        showToast(`🎯 "${title.trim()}" geplant!`);
         setTitle('');
         setDescription('');
         setDate('');

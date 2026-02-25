@@ -5,6 +5,7 @@
     --primary: #2E7D32;
     --primary-light: #60ad5e;
     --primary-dark: #005005;
+    --primary-alpha: rgba(46, 125, 50, 0.10);
     --secondary: #FF9800;
     --secondary-light: #ffc947;
     --secondary-dark: #c66900;
@@ -12,9 +13,10 @@
 
     --bg: #f5f7fa;
     --bg-card: #ffffff;
-    --bg-nav: #ffffff;
+    --bg-nav: rgba(255, 255, 255, 0.85);
     --bg-sidebar: #fafafa;
     --bg-input: #ffffff;
+    --bg-hover: rgba(0, 0, 0, 0.04);
 
     --text: #212121;
     --text-secondary: #616161;
@@ -23,8 +25,8 @@
 
     --border: #e0e0e0;
     --divider: #eeeeee;
-    --shadow: rgba(0, 0, 0, 0.08);
-    --shadow-lg: rgba(0, 0, 0, 0.12);
+    --shadow: rgba(0, 0, 0, 0.06);
+    --shadow-lg: rgba(0, 0, 0, 0.10);
 
     /* Status-Farben */
     --success: #43a047;
@@ -32,8 +34,14 @@
     --danger: #e53935;
     --info: #039be5;
 
+    /* Gradient */
+    --gradient-primary: linear-gradient(135deg, #2E7D32, #66bb6a);
+    --gradient-warm: linear-gradient(135deg, #FF9800, #FFD54F);
+    --gradient-cool: linear-gradient(135deg, #0288d1, #4FC3F7);
+    --gradient-pink: linear-gradient(135deg, #E91E63, #F48FB1);
+
     /* ─── Typografie ─── */
-    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, monospace;
     --fs-xs: 0.75rem;
     --fs-sm: 0.875rem;
@@ -41,8 +49,10 @@
     --fs-lg: 1.125rem;
     --fs-xl: 1.5rem;
     --fs-2xl: 2rem;
+    --fs-3xl: 2.5rem;
     --fw-normal: 400;
     --fw-medium: 500;
+    --fw-semibold: 600;
     --fw-bold: 700;
     --lh: 1.6;
 
@@ -55,22 +65,25 @@
     --space-2xl: 3rem;
 
     /* ─── Radien & Schatten ─── */
-    --radius-sm: 6px;
-    --radius: 10px;
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius: 12px;
     --radius-lg: 16px;
+    --radius-xl: 24px;
     --radius-full: 9999px;
 
     --shadow-sm: 0 1px 3px var(--shadow);
     --shadow-md: 0 4px 12px var(--shadow);
-    --shadow-card: 0 2px 8px var(--shadow), 0 1px 3px var(--shadow-lg);
-    --shadow-elevated: 0 8px 24px var(--shadow-lg);
+    --shadow-card: 0 2px 8px var(--shadow), 0 0 0 1px rgba(0,0,0,0.03);
+    --shadow-elevated: 0 12px 32px var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.04);
 
     /* ─── Layout ─── */
-    --navbar-h: 60px;
-    --sidebar-w: 220px;
+    --navbar-h: 64px;
+    --sidebar-w: 240px;
     --max-w: 960px;
 
     /* ─── Transitions ─── */
     --transition: 0.2s ease;
     --transition-slow: 0.35s ease;
+    --transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }

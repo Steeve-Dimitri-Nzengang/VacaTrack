@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import { addLogEntry } from '../../store/slices/logbookSlice';
 import { LogEntry } from '../../types/logbook';
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from '../common/Toast';
 
 const LogEntryForm: React.FC = () => {
     const dispatch = useDispatch();
+    const { showToast } = useToast();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
@@ -26,6 +28,7 @@ const LogEntryForm: React.FC = () => {
             date,
             time,
         }));
+        showToast(`📖 "${title.trim()}" zum Logbuch hinzugefügt!`);
         setTitle('');
         setDescription('');
         setLocation('');

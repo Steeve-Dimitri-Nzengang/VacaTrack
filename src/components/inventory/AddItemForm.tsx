@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../../store/slices/inventorySlice';
 import { InventoryItem } from '../../types/inventory';
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from '../common/Toast';
 
 /** Bild via Canvas komprimieren, max 800px Breite, 0.7 JPEG-Qualität */
 const compressImage = (file: File, maxWidth = 800, quality = 0.7): Promise<string> => {
@@ -37,6 +38,7 @@ const AddItemForm: React.FC = () => {
     const [compressing, setCompressing] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
+    const { showToast } = useToast();
 
     const handlePhotoCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -75,6 +77,7 @@ const AddItemForm: React.FC = () => {
             notes: notes || undefined,
         };
         dispatch(addItem(newItem));
+        showToast(`📦 "${name.trim()}" hinzugefügt!`);
         setName('');
         setQuantity(1);
         setNotes('');

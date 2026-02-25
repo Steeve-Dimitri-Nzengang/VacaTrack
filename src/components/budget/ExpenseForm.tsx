@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addExpense } from '../../store/slices/budgetSlice';
 import { RootState } from '../../store';
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from '../common/Toast';
 
 const ExpenseForm: React.FC = () => {
     const dispatch = useDispatch();
     const currency = useSelector((state: RootState) => state.budget.currency);
+    const { showToast } = useToast();
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
@@ -28,6 +30,7 @@ const ExpenseForm: React.FC = () => {
             category,
             currency,
         }));
+        showToast(`💰 Ausgabe "${description}" gespeichert!`);
         setDescription('');
         setAmount('');
         setTime('');

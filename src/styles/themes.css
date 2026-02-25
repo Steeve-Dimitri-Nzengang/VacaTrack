@@ -5,15 +5,17 @@
     --primary: #2E7D32;
     --primary-light: #60ad5e;
     --primary-dark: #005005;
+    --primary-alpha: rgba(46, 125, 50, 0.10);
     --secondary: #FF9800;
     --secondary-light: #ffc947;
     --secondary-dark: #c66900;
 
     --bg: #f5f7fa;
     --bg-card: #ffffff;
-    --bg-nav: #ffffff;
+    --bg-nav: rgba(255, 255, 255, 0.85);
     --bg-sidebar: #fafafa;
     --bg-input: #ffffff;
+    --bg-hover: rgba(0, 0, 0, 0.04);
 
     --text: #212121;
     --text-secondary: #616161;
@@ -22,8 +24,13 @@
 
     --border: #e0e0e0;
     --divider: #eeeeee;
-    --shadow: rgba(0, 0, 0, 0.08);
-    --shadow-lg: rgba(0, 0, 0, 0.12);
+    --shadow: rgba(0, 0, 0, 0.06);
+    --shadow-lg: rgba(0, 0, 0, 0.10);
+
+    --gradient-primary: linear-gradient(135deg, #2E7D32, #66bb6a);
+    --gradient-warm: linear-gradient(135deg, #FF9800, #FFD54F);
+    --gradient-cool: linear-gradient(135deg, #0288d1, #4FC3F7);
+    --gradient-pink: linear-gradient(135deg, #E91E63, #F48FB1);
 }
 
 /* Dark-Theme */
@@ -31,30 +38,37 @@
     --primary: #66bb6a;
     --primary-light: #98ee99;
     --primary-dark: #338a3e;
+    --primary-alpha: rgba(102, 187, 106, 0.12);
     --secondary: #ffb74d;
     --secondary-light: #ffe97d;
     --secondary-dark: #c88719;
 
-    --bg: #121212;
-    --bg-card: #1e1e1e;
-    --bg-nav: #1a1a1a;
-    --bg-sidebar: #181818;
-    --bg-input: #2c2c2c;
+    --bg: #0f1117;
+    --bg-card: #1a1b23;
+    --bg-nav: rgba(26, 27, 35, 0.90);
+    --bg-sidebar: #15161d;
+    --bg-input: #22232d;
+    --bg-hover: rgba(255, 255, 255, 0.06);
 
-    --text: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --text-muted: #757575;
+    --text: #e8e8ed;
+    --text-secondary: #a0a0b0;
+    --text-muted: #666680;
     --text-on-primary: #000000;
 
-    --border: #333333;
-    --divider: #2a2a2a;
-    --shadow: rgba(0, 0, 0, 0.3);
-    --shadow-lg: rgba(0, 0, 0, 0.5);
+    --border: #2a2b38;
+    --divider: #22232d;
+    --shadow: rgba(0, 0, 0, 0.30);
+    --shadow-lg: rgba(0, 0, 0, 0.50);
 
     --success: #66bb6a;
     --warning: #ffa726;
     --danger: #ef5350;
     --info: #42a5f5;
+
+    --gradient-primary: linear-gradient(135deg, #338a3e, #66bb6a);
+    --gradient-warm: linear-gradient(135deg, #c88719, #ffb74d);
+    --gradient-cool: linear-gradient(135deg, #0277bd, #42a5f5);
+    --gradient-pink: linear-gradient(135deg, #c2185b, #f06292);
 }
 
 /* Sanfter Übergang beim Theme-Wechsel */

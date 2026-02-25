@@ -5,6 +5,7 @@ import { RootState } from './store';
 import Navbar from './components/common/Navbar';
 import Sidebar from './components/common/Sidebar';
 import OfflineBanner from './components/common/OfflineBanner';
+import { ToastProvider } from './components/common/Toast';
 import Home from './pages/Home';
 import InventoryPage from './pages/InventoryPage';
 import ActivitiesPage from './pages/ActivitiesPage';
@@ -23,22 +24,24 @@ const App = () => {
 
     return (
         <Router>
-            <div className="app-container">
-                <Navbar />
-                <Sidebar />
-                <OfflineBanner />
-                <main className="main-content">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/inventory" element={<InventoryPage />} />
-                        <Route path="/activities" element={<ActivitiesPage />} />
-                        <Route path="/budget" element={<BudgetPage />} />
-                        <Route path="/logbook" element={<LogbookPage />} />
-                        <Route path="/settings" element={<SettingsPage />} />
-                        <Route path="/trip/:tripId" element={<TripDetailPage />} />
-                    </Routes>
-                </main>
-            </div>
+            <ToastProvider>
+                <div className="app-container">
+                    <Navbar />
+                    <Sidebar />
+                    <OfflineBanner />
+                    <main className="main-content">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/inventory" element={<InventoryPage />} />
+                            <Route path="/activities" element={<ActivitiesPage />} />
+                            <Route path="/budget" element={<BudgetPage />} />
+                            <Route path="/logbook" element={<LogbookPage />} />
+                            <Route path="/settings" element={<SettingsPage />} />
+                            <Route path="/trip/:tripId" element={<TripDetailPage />} />
+                        </Routes>
+                    </main>
+                </div>
+            </ToastProvider>
         </Router>
     );
 };
