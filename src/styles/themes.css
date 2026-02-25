@@ -1,0 +1,70 @@
+/* ===== VacaTrack Themes ===== */
+
+/* Light-Theme → Standardwerte aus variables.css */
+[data-theme='light'] {
+    --primary: #2E7D32;
+    --primary-light: #60ad5e;
+    --primary-dark: #005005;
+    --secondary: #FF9800;
+    --secondary-light: #ffc947;
+    --secondary-dark: #c66900;
+
+    --bg: #f5f7fa;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --bg-sidebar: #fafafa;
+    --bg-input: #ffffff;
+
+    --text: #212121;
+    --text-secondary: #616161;
+    --text-muted: #9e9e9e;
+    --text-on-primary: #ffffff;
+
+    --border: #e0e0e0;
+    --divider: #eeeeee;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-lg: rgba(0, 0, 0, 0.12);
+}
+
+/* Dark-Theme */
+[data-theme='dark'] {
+    --primary: #66bb6a;
+    --primary-light: #98ee99;
+    --primary-dark: #338a3e;
+    --secondary: #ffb74d;
+    --secondary-light: #ffe97d;
+    --secondary-dark: #c88719;
+
+    --bg: #121212;
+    --bg-card: #1e1e1e;
+    --bg-nav: #1a1a1a;
+    --bg-sidebar: #181818;
+    --bg-input: #2c2c2c;
+
+    --text: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #757575;
+    --text-on-primary: #000000;
+
+    --border: #333333;
+    --divider: #2a2a2a;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-lg: rgba(0, 0, 0, 0.5);
+
+    --success: #66bb6a;
+    --warning: #ffa726;
+    --danger: #ef5350;
+    --info: #42a5f5;
+}
+
+/* Sanfter Übergang beim Theme-Wechsel */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+    transition:
+        background-color var(--transition-slow),
+        color var(--transition-slow),
+        border-color var(--transition-slow),
+        box-shadow var(--transition-slow) !important;
+}
