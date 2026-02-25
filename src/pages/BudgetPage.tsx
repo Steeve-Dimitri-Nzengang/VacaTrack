@@ -25,8 +25,8 @@ const BudgetPage: React.FC = () => {
         <div className="budget-page">
             <h1>💰 Budget-Manager</h1>
 
-            <form onSubmit={handleSetBudget} className="card" style={{ display: 'flex', gap: '8px', alignItems: 'flex-end' }}>
-                <div className="form-group" style={{ flex: 1 }}>
+            <form onSubmit={handleSetBudget} className="card form-row-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '8px', alignItems: 'end' }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
                     <label htmlFor="totalBudget">Gesamtbudget festlegen:</label>
                     <input type="number" id="totalBudget" value={budgetInput} onChange={(e) => setBudgetInput(e.target.value)} step="0.01" min="0" />
                 </div>

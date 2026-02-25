@@ -125,7 +125,7 @@ const SettingsPage: React.FC = () => {
                 <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
                     Exportiere alle deine Daten als JSON-Backup oder stelle sie aus einer Datei wieder her.
                 </p>
-                <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+                <div className="form-row-responsive" style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
                     <button onClick={handleExportAll} className="button">📤 Backup exportieren</button>
                     <label className="button secondary" style={{ cursor: 'pointer' }}>
                         📥 Backup importieren

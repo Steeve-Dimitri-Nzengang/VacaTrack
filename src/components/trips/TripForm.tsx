@@ -72,7 +72,7 @@ const TripForm: React.FC<TripFormProps> = ({ onClose }) => {
                             required
                         />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+                    <div className="form-row-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
                         <div className="form-group">
                             <label htmlFor="tripStart">Von</label>
                             <input
@@ -105,7 +105,7 @@ const TripForm: React.FC<TripFormProps> = ({ onClose }) => {
                             rows={3}
                         />
                     </div>
-                    <div style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'flex-end' }}>
+                    <div className="form-row-responsive" style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                         <button type="button" className="button secondary" onClick={onClose}>Abbrechen</button>
                         <button type="submit" className="button">✈️ Reise hinzufügen</button>
                     </div>

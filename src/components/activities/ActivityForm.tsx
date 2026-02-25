@@ -47,7 +47,7 @@ const ActivityForm: React.FC = () => {
                 <label htmlFor="actTitle">Titel</label>
                 <input type="text" id="actTitle" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="z.B. Eiffelturm besichtigen" required />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+            <div className="form-row-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
                 <div className="form-group">
                     <label htmlFor="actDate">Datum</label>
                     <input type="date" id="actDate" value={date} onChange={(e) => setDate(e.target.value)} required />
@@ -57,7 +57,7 @@ const ActivityForm: React.FC = () => {
                     <input type="time" id="actTime" value={time} onChange={(e) => setTime(e.target.value)} />
                 </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+            <div className="form-row-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
                 <div className="form-group">
                     <label htmlFor="actType">Typ</label>
                     <select id="actType" value={type} onChange={(e) => setType(e.target.value as ActivityType)}>

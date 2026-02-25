@@ -21,7 +21,7 @@ const CurrencyConverter: React.FC = () => {
             <div className="form-group">
                 <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} min="0" step="0.01" />
             </div>
-            <div className="form-group" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <div className="form-row-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '8px', alignItems: 'center' }}>
                 <select value={from} onChange={(e) => setFrom(e.target.value)}>
                     {currencies.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
