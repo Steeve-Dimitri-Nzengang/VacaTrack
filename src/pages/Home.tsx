@@ -1,14 +1,20 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
+import { removeTrip } from '../store/slices/tripSlice';
 import { formatCurrency } from '../utils/currencyHelpers';
+import TripForm from '../components/trips/TripForm';
+import TripCard from '../components/trips/TripCard';
 
 const Home: React.FC = () => {
+    const dispatch = useDispatch();
     const items = useSelector((s: RootState) => s.inventory.items);
     const activities = useSelector((s: RootState) => s.activities.activities);
     const { totalBudget, expenses, currency } = useSelector((s: RootState) => s.budget);
     const logEntries = useSelector((s: RootState) => s.logbook.entries);
+    const trips = useSelector((s: RootState) => s.trip.trips);
+    const [showTripForm, setShowTripForm] = useState(false);
 
     const stats = useMemo(() => {
         const packedCount = items.filter(i => i.packed).length;
@@ -98,6 +104,39 @@ const Home: React.FC = () => {
                     )}
                 </Link>
             </div>
+
+            {/* Meine Reisen */}
+            <section className="trips-section">
+                <div className="trips-header">
+                    <h2>✈️ Meine Reisen</h2>
+                    <button className="button" onClick={() => setShowTripForm(true)}>
+                        + Neue Reise
+                    </button>
+                </div>
+
+                {trips.length === 0 ? (
+                    <div className="card empty-state">
+                        <span className="empty-state-icon">🌍</span>
+                        <p>Du hast noch keine Reisen angelegt.</p>
+                        <p className="text-muted">Füge deine erste Reise hinzu, um den Überblick zu behalten!</p>
+                    </div>
+                ) : (
+                    <div className="trips-list">
+                        {[...trips]
+                            .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+                            .map(trip => (
+                                <TripCard
+                                    key={trip.id}
+                                    trip={trip}
+                                    onDelete={(id) => dispatch(removeTrip(id))}
+                                />
+                            ))
+                        }
+                    </div>
+                )}
+            </section>
+
+            {showTripForm && <TripForm onClose={() => setShowTripForm(false)} />}
         </div>
     );
 };

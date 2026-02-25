@@ -1038,3 +1038,269 @@ img {
     background: var(--primary-alpha);
     color: var(--primary-dark);
 }
+
+/* ==================== Trip Section ==================== */
+
+.trip-section {
+    margin-top: 2.5rem;
+}
+
+.trip-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trip-section .btn {
+    margin-bottom: 1.25rem;
+}
+
+.trip-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* Trip Card */
+.trip-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: cardIn 0.4s ease both;
+}
+
+.trip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.trip-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.25rem 1.25rem 0.75rem;
+}
+
+.trip-card-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.trip-card-header h3 a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.trip-card-header h3 a:hover {
+    color: var(--primary);
+}
+
+/* Trip Status Badges */
+.trip-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.trip-status.upcoming {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.trip-status.active {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.trip-status.completed {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+/* Trip Meta Info */
+.trip-meta {
+    padding: 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.trip-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Trip Notes */
+.trip-notes {
+    padding: 0.75rem 1.25rem 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    margin-top: 0.75rem;
+}
+
+/* Trip Actions */
+.trip-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem 1.25rem 1rem;
+    gap: 0.5rem;
+}
+
+.trip-actions .btn-danger {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.trip-actions .btn-danger:hover {
+    background: #fee2e2;
+    border-color: #f87171;
+}
+
+/* Empty Trips State */
+.empty-trips {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+}
+
+.empty-trips .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-trips p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Trip Form */
+.trip-form {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: cardIn 0.3s ease both;
+}
+
+.trip-form h3 {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.trip-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 600px) {
+    .trip-form .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.trip-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.trip-form .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: var(--text-secondary);
+}
+
+.trip-form .form-group input,
+.trip-form .form-group textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.trip-form .form-group input:focus,
+.trip-form .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-alpha);
+}
+
+.trip-form .form-group textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+.trip-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* Dark theme adjustments for trip status badges */
+[data-theme="dark"] .trip-status.upcoming {
+    background: rgba(14, 165, 233, 0.15);
+    color: #7dd3fc;
+}
+
+[data-theme="dark"] .trip-status.active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #86efac;
+}
+
+[data-theme="dark"] .trip-status.completed {
+    background: rgba(139, 92, 246, 0.15);
+    color: #c4b5fd;
+}
+
+[data-theme="dark"] .trip-actions .btn-danger {
+    background: rgba(220, 38, 38, 0.1);
+    color: #f87171;
+    border-color: rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="dark"] .trip-actions .btn-danger:hover {
+    background: rgba(220, 38, 38, 0.2);
+    border-color: rgba(220, 38, 38, 0.5);
+}
