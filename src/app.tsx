@@ -11,6 +11,7 @@ import InventoryPage from './pages/InventoryPage';
 import ActivitiesPage from './pages/ActivitiesPage';
 import BudgetPage from './pages/BudgetPage';
 import LogbookPage from './pages/LogbookPage';
+import CurrencyPage from './pages/CurrencyPage';
 import SettingsPage from './pages/SettingsPage';
 import TripDetailPage from './pages/TripDetailPage';
 
@@ -36,6 +37,7 @@ const App = () => {
                             <Route path="/activities" element={<ActivitiesPage />} />
                             <Route path="/budget" element={<BudgetPage />} />
                             <Route path="/logbook" element={<LogbookPage />} />
+                            <Route path="/currency" element={<CurrencyPage />} />
                             <Route path="/settings" element={<SettingsPage />} />
                             <Route path="/trip/:tripId" element={<TripDetailPage />} />
                         </Routes>

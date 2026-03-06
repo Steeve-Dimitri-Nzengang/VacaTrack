@@ -6,6 +6,7 @@ const SIDEBAR_ITEMS = [
     { to: '/activities', emoji: '🎯', label: 'Aktivitäten' },
     { to: '/budget', emoji: '💰', label: 'Budget' },
     { to: '/logbook', emoji: '📖', label: 'Logbuch' },
+    { to: '/currency', emoji: '💱', label: 'Währungsrechner' },
     { to: '/settings', emoji: '⚙️', label: 'Einstellungen' },
 ];
 

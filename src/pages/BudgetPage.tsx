@@ -7,7 +7,6 @@ import BudgetDashboard from '../components/budget/BudgetDashboard';
 import ExpenseForm from '../components/budget/ExpenseForm';
 import ExpenseList from '../components/budget/ExpenseList';
 import BudgetChart from '../components/budget/BudgetChart';
-import CurrencyConverter from '../components/budget/CurrencyConverter';
 
 const BudgetPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -51,7 +50,6 @@ const BudgetPage: React.FC = () => {
             </div>
             <ExpenseList onEdit={handleEditExpense} />
             <BudgetChart />
-            <CurrencyConverter />
         </div>
     );
 };

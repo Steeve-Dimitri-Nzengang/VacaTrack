@@ -10,6 +10,9 @@ export function convertCurrency(amount: number, exchangeRate: number): number {
 }
 
 export function isValidCurrencyCode(code: string): boolean {
-    const currencyCodes = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'SEK', 'NZD'];
+    const currencyCodes = [
+        'USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'SEK', 'NZD',
+        'TRY', 'THB', 'PLN', 'NOK', 'DKK', 'INR', 'BRL', 'ZAR', 'MAD', 'XAF',
+    ];
     return currencyCodes.includes(code);
 }

@@ -103,6 +103,13 @@ const Home: React.FC = () => {
                         <span className="module-badge">{stats.logCount} Einträge</span>
                     )}
                 </Link>
+                <Link to="/currency" className="card module-card module-currency">
+                    <span className="module-icon">💱</span>
+                    <div className="module-info">
+                        <h2>Währungsrechner</h2>
+                        <p>Live-Wechselkurse für 19 Währungen inkl. MAD & XAF.</p>
+                    </div>
+                </Link>
             </div>
 
             {/* Meine Reisen */}

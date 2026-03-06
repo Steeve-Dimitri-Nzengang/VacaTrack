@@ -632,6 +632,7 @@ body::before {
 .module-activities::before { background: var(--gradient-cool); }
 .module-budget::before     { background: var(--gradient-warm); }
 .module-logbook::before    { background: var(--gradient-pink); }
+.module-currency::before   { background: linear-gradient(135deg, #06b6d4, #8b5cf6); }
 
 .module-card:hover {
     transform: translateY(-4px);
