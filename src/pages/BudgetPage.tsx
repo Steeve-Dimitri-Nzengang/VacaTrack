@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { setTotalBudget } from '../store/slices/budgetSlice';
+import { Expense } from '../types/budget';
 import BudgetDashboard from '../components/budget/BudgetDashboard';
 import ExpenseForm from '../components/budget/ExpenseForm';
 import ExpenseList from '../components/budget/ExpenseList';
@@ -12,6 +13,8 @@ const BudgetPage: React.FC = () => {
     const dispatch = useDispatch();
     const totalBudget = useSelector((state: RootState) => state.budget.totalBudget);
     const [budgetInput, setBudgetInput] = useState(totalBudget.toString());
+    const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
+    const formRef = useRef<HTMLDivElement>(null);
 
     const handleSetBudget = (e: React.FormEvent) => {
         e.preventDefault();
@@ -19,6 +22,15 @@ const BudgetPage: React.FC = () => {
         if (!isNaN(val) && val >= 0) {
             dispatch(setTotalBudget(val));
         }
+    };
+
+    const handleEditExpense = (expense: Expense) => {
+        setEditingExpense(expense);
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    const handleEditDone = () => {
+        setEditingExpense(null);
     };
 
     return (
@@ -34,8 +46,10 @@ const BudgetPage: React.FC = () => {
             </form>
 
             <BudgetDashboard />
-            <ExpenseForm />
-            <ExpenseList />
+            <div ref={formRef}>
+                <ExpenseForm editingExpense={editingExpense} onDone={handleEditDone} />
+            </div>
+            <ExpenseList onEdit={handleEditExpense} />
             <BudgetChart />
             <CurrencyConverter />
         </div>

@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExpense } from '../../store/slices/budgetSlice';
+import { addExpense, updateExpense } from '../../store/slices/budgetSlice';
 import { RootState } from '../../store';
+import { Expense } from '../../types/budget';
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '../common/Toast';
 
-const ExpenseForm: React.FC = () => {
+interface ExpenseFormProps {
+    editingExpense?: Expense | null;
+    onDone?: () => void;
+}
+
+const ExpenseForm: React.FC<ExpenseFormProps> = ({ editingExpense, onDone }) => {
     const dispatch = useDispatch();
     const currency = useSelector((state: RootState) => state.budget.currency);
     const { showToast } = useToast();
@@ -16,30 +22,68 @@ const ExpenseForm: React.FC = () => {
     const [location, setLocation] = useState('');
     const [category, setCategory] = useState('Essen');
 
+    // When editingExpense changes, populate the form
+    useEffect(() => {
+        if (editingExpense) {
+            setDescription(editingExpense.description);
+            setAmount(editingExpense.amount.toString());
+            setDate(editingExpense.date);
+            setTime(editingExpense.time || '');
+            setLocation(editingExpense.location || '');
+            setCategory(editingExpense.category);
+        }
+    }, [editingExpense]);
+
+    const resetForm = () => {
+        setDescription('');
+        setAmount('');
+        setDate(new Date().toISOString().split('T')[0]);
+        setTime('');
+        setLocation('');
+        setCategory('Essen');
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!description || !amount || !date) return;
 
-        dispatch(addExpense({
-            id: uuidv4(),
-            description,
-            amount: parseFloat(amount),
-            date,
-            time: time || undefined,
-            location: location || undefined,
-            category,
-            currency,
-        }));
-        showToast(`💰 Ausgabe "${description}" gespeichert!`);
-        setDescription('');
-        setAmount('');
-        setTime('');
-        setLocation('');
+        if (editingExpense) {
+            dispatch(updateExpense({
+                id: editingExpense.id,
+                description,
+                amount: parseFloat(amount),
+                date,
+                time: time || undefined,
+                location: location || undefined,
+                category,
+                currency: editingExpense.currency || currency,
+            }));
+            showToast(`✏️ Ausgabe "${description}" aktualisiert!`);
+            onDone?.();
+        } else {
+            dispatch(addExpense({
+                id: uuidv4(),
+                description,
+                amount: parseFloat(amount),
+                date,
+                time: time || undefined,
+                location: location || undefined,
+                category,
+                currency,
+            }));
+            showToast(`💰 Ausgabe "${description}" gespeichert!`);
+        }
+        resetForm();
+    };
+
+    const handleCancel = () => {
+        resetForm();
+        onDone?.();
     };
 
     return (
         <form className="card" onSubmit={handleSubmit}>
-            <h3>Neue Ausgabe erfassen</h3>
+            <h3>{editingExpense ? '✏️ Ausgabe bearbeiten' : 'Neue Ausgabe erfassen'}</h3>
             <div className="form-group">
                 <label htmlFor="expDesc">Beschreibung:</label>
                 <input type="text" id="expDesc" value={description} onChange={(e) => setDescription(e.target.value)} required />
@@ -71,7 +115,16 @@ const ExpenseForm: React.FC = () => {
                     <option value="Sonstiges">📌 Sonstiges</option>
                 </select>
             </div>
-            <button type="submit" className="button">Ausgabe speichern</button>
+            <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+                <button type="submit" className="button">
+                    {editingExpense ? 'Änderungen speichern' : 'Ausgabe speichern'}
+                </button>
+                {editingExpense && (
+                    <button type="button" className="button secondary" onClick={handleCancel}>
+                        Abbrechen
+                    </button>
+                )}
+            </div>
         </form>
     );
 };

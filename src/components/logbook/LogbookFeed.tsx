@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectLogEntries } from '../../store/slices/logbookSlice';
+import { LogEntry as LogEntryType } from '../../types/logbook';
 import LogEntry from './LogEntry';
 
 /** Datum hübsch formatieren: "Mo., 24. Feb. 2026" */
@@ -13,7 +14,11 @@ const formatGroupDate = (dateStr: string): string => {
     }
 };
 
-const LogbookFeed: React.FC = () => {
+interface LogbookFeedProps {
+    onEdit?: (entry: LogEntryType) => void;
+}
+
+const LogbookFeed: React.FC<LogbookFeedProps> = ({ onEdit }) => {
     const logEntries = useSelector(selectLogEntries);
     const [search, setSearch] = useState('');
 
@@ -80,7 +85,7 @@ const LogbookFeed: React.FC = () => {
                         </h4>
                         <ul className="timeline">
                             {group.entries.map(entry => (
-                                <LogEntry key={entry.id} entry={entry} />
+                                <LogEntry key={entry.id} entry={entry} onEdit={onEdit} />
                             ))}
                         </ul>
                     </div>

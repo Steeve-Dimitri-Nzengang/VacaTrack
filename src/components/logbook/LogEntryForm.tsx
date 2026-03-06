@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addLogEntry } from '../../store/slices/logbookSlice';
+import { addLogEntry, updateLogEntry } from '../../store/slices/logbookSlice';
 import { LogEntry } from '../../types/logbook';
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '../common/Toast';
 
-const LogEntryForm: React.FC = () => {
+interface LogEntryFormProps {
+    editingEntry?: LogEntry | null;
+    onDone?: () => void;
+}
+
+const LogEntryForm: React.FC<LogEntryFormProps> = ({ editingEntry, onDone }) => {
     const dispatch = useDispatch();
     const { showToast } = useToast();
     const [title, setTitle] = useState('');
@@ -15,28 +20,67 @@ const LogEntryForm: React.FC = () => {
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [time, setTime] = useState(new Date().toTimeString().slice(0, 5));
 
+    // When editingEntry changes, populate the form
+    useEffect(() => {
+        if (editingEntry) {
+            setTitle(editingEntry.title);
+            setDescription(editingEntry.description);
+            setLocation(editingEntry.location);
+            setLocationType(editingEntry.locationType);
+            setDate(editingEntry.date);
+            setTime(editingEntry.time);
+        }
+    }, [editingEntry]);
+
+    const resetForm = () => {
+        setTitle('');
+        setDescription('');
+        setLocation('');
+        setLocationType('sonstiges');
+        setDate(new Date().toISOString().split('T')[0]);
+        setTime(new Date().toTimeString().slice(0, 5));
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!title.trim() || !location.trim()) return;
 
-        dispatch(addLogEntry({
-            id: uuidv4(),
-            title: title.trim(),
-            description,
-            location: location.trim(),
-            locationType,
-            date,
-            time,
-        }));
-        showToast(`📖 "${title.trim()}" zum Logbuch hinzugefügt!`);
-        setTitle('');
-        setDescription('');
-        setLocation('');
+        if (editingEntry) {
+            dispatch(updateLogEntry({
+                id: editingEntry.id,
+                title: title.trim(),
+                description,
+                location: location.trim(),
+                locationType,
+                date,
+                time,
+                photos: editingEntry.photos,
+            }));
+            showToast(`✏️ "${title.trim()}" aktualisiert!`);
+            onDone?.();
+        } else {
+            dispatch(addLogEntry({
+                id: uuidv4(),
+                title: title.trim(),
+                description,
+                location: location.trim(),
+                locationType,
+                date,
+                time,
+            }));
+            showToast(`📖 "${title.trim()}" zum Logbuch hinzugefügt!`);
+        }
+        resetForm();
+    };
+
+    const handleCancel = () => {
+        resetForm();
+        onDone?.();
     };
 
     return (
         <form onSubmit={handleSubmit} className="card">
-            <h3>Neuer Logbuch-Eintrag</h3>
+            <h3>{editingEntry ? '✏️ Eintrag bearbeiten' : 'Neuer Logbuch-Eintrag'}</h3>
             <div className="form-group">
                 <label htmlFor="logTitle">Titel:</label>
                 <input type="text" id="logTitle" value={title} onChange={(e) => setTitle(e.target.value)} required />
@@ -69,7 +113,16 @@ const LogEntryForm: React.FC = () => {
                 <label htmlFor="logDesc">Beschreibung:</label>
                 <textarea id="logDesc" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
-            <button type="submit" className="button">Eintrag speichern</button>
+            <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+                <button type="submit" className="button">
+                    {editingEntry ? 'Änderungen speichern' : 'Eintrag speichern'}
+                </button>
+                {editingEntry && (
+                    <button type="button" className="button secondary" onClick={handleCancel}>
+                        Abbrechen
+                    </button>
+                )}
+            </div>
         </form>
     );
 };

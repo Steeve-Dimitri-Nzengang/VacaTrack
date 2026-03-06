@@ -2,9 +2,14 @@ import { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { removeExpense } from '../../store/slices/budgetSlice';
+import { Expense } from '../../types/budget';
 import { formatCurrency } from '../../utils/currencyHelpers';
 
-const ExpenseList: React.FC = () => {
+interface ExpenseListProps {
+    onEdit?: (expense: Expense) => void;
+}
+
+const ExpenseList: React.FC<ExpenseListProps> = ({ onEdit }) => {
     const dispatch = useDispatch();
     const expenses = useSelector((state: RootState) => state.budget.expenses);
     const currency = useSelector((state: RootState) => state.budget.currency);
@@ -83,7 +88,10 @@ const ExpenseList: React.FC = () => {
                                     <td>{expense.date}{expense.time ? ` ${expense.time}` : ''}</td>
                                     <td><span className="category-badge">{expense.category}</span></td>
                                     <td>
-                                        <button onClick={() => dispatch(removeExpense(expense.id))} className="button small danger">✕</button>
+                                        <div style={{ display: 'flex', gap: '4px' }}>
+                                            <button onClick={() => onEdit?.(expense)} className="button small" title="Bearbeiten">✏️</button>
+                                            <button onClick={() => dispatch(removeExpense(expense.id))} className="button small danger" title="Löschen">✕</button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
