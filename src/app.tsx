@@ -23,8 +23,11 @@ const App = () => {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
 
+    // Vite setzt import.meta.env.BASE_URL auf "/VacaTrack/" (GitHub Pages) bzw. "/" (lokal)
+    const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+
     return (
-        <Router>
+        <Router basename={basename}>
             <ToastProvider>
                 <div className="app-container">
                     <Navbar />

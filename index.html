@@ -13,6 +13,28 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- SPA-Redirect: Fängt den Redirect von 404.html ab und stellt den Pfad wieder her -->
+    <script>
+      (function () {
+        var redirect = window.location.search.split("?/");
+        if (redirect[1]) {
+          var decoded = redirect[1].split("&").map(function (s) {
+            return s.replace(/~and~/g, "&");
+          });
+          var path = decoded[0];
+          var query =
+            decoded.length > 1 ? "?" + decoded.slice(1).join("&") : "";
+          window.history.replaceState(
+            null,
+            "",
+            window.location.pathname +
+              (path ? path : "") +
+              query +
+              window.location.hash,
+          );
+        }
+      })();
+    </script>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

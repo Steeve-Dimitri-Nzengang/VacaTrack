@@ -1,7 +1,7 @@
 export const pwaConfig = {
   name: "VacaTrack",
   short_name: "VacaTrack",
-  start_url: "/",
+  start_url: "./",
   display: "standalone",
   background_color: "#ffffff",
   theme_color: "#4CAF50",
@@ -40,7 +40,7 @@ export const pwaConfig = {
     }
   },
   serviceWorker: {
-    scope: "/",
-    updateViaCache: "all"
+    scope: "./",
+    updateViaCache: "none"
   }
 };

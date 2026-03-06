@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VacaTrack</title>
+    <script>
+      // SPA-Redirect für GitHub Pages:
+      // Leitet alle 404-Pfade an index.html weiter, damit React Router sie verarbeiten kann.
+      // Der Pfad wird als Query-Parameter übergeben und in index.html ausgewertet.
+      var pathSegmentsToKeep = 1; // '/VacaTrack' = 1 Segment
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          l.pathname
+            .split("/")
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join("/") +
+          "/?/" +
+          l.pathname
+            .slice(1)
+            .split("/")
+            .slice(pathSegmentsToKeep)
+            .join("/")
+            .replace(/&/g, "~and~") +
+          (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash,
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

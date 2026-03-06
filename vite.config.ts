@@ -2,9 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const base = process.env.GITHUB_ACTIONS ? '/VacaTrack/' : '/';
+
 export default defineConfig({
-  // GitHub Pages: /VacaTrack/  —  Lokal: /
-  base: process.env.GITHUB_ACTIONS ? '/VacaTrack/' : '/',
+  base,
   plugins: [
     react(),
     VitePWA({
@@ -17,7 +18,8 @@ export default defineConfig({
         theme_color: '#4CAF50',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: './',
+        start_url: base,
+        scope: base,
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -34,8 +36,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        // SPA: alle Navigation-Requests → index.html
-        navigateFallback: 'index.html',
+        // SPA: alle Navigation-Requests → index.html (mit korrektem Basispfad)
+        navigateFallback: base + 'index.html',
         navigateFallbackDenylist: [/^\/api/],
         // Altes Cache sofort aufräumen
         cleanupOutdatedCaches: true,
