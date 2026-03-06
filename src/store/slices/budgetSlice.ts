@@ -32,9 +32,12 @@ const budgetSlice = createSlice({
     clearExpenses(state) {
       state.expenses = [];
     },
+    setExpenses(state, action: PayloadAction<Expense[]>) {
+      state.expenses = action.payload;
+    },
   },
 });
 
-export const { setTotalBudget, setCurrency, addExpense, removeExpense, updateExpense, clearExpenses } = budgetSlice.actions;
+export const { setTotalBudget, setCurrency, addExpense, removeExpense, updateExpense, clearExpenses, setExpenses } = budgetSlice.actions;
 
 export default budgetSlice.reducer;

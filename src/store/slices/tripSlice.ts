@@ -36,9 +36,12 @@ const tripSlice = createSlice({
     updateSettings(state, action: PayloadAction<Partial<Settings>>) {
       state.settings = { ...state.settings, ...action.payload };
     },
+    setTrips(state, action: PayloadAction<Trip[]>) {
+      state.trips = action.payload;
+    },
   },
 });
 
-export const { addTrip, removeTrip, selectTrip, deselectTrip, updateTrip, updateSettings } = tripSlice.actions;
+export const { addTrip, removeTrip, selectTrip, deselectTrip, updateTrip, updateSettings, setTrips } = tripSlice.actions;
 
 export default tripSlice.reducer;
